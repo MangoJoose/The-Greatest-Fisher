@@ -6,10 +6,8 @@ yarn-error.log*
 
 # ========== System Files ==========
 .DS_Store
-
 node_modules/
 dist/
-build/
 .env
 
 
@@ -22,7 +20,6 @@ client/.pnp.js
 
 # testing
 client/coverage
-
 client/build
 
 # misc
