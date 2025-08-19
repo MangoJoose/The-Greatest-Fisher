@@ -3,7 +3,7 @@ import path from 'path';
 
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 // Handlebars
 app.set('view engine', 'hbs');
@@ -27,10 +27,12 @@ app.get('/login', (req, res) => {
 });
 
 // Fallback
+/*
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+*/
 
-app.listen(port, () => {
+app.listen(port, () => { // Run Server with npm run dev
     console.log(`Server is running at http://localhost:${port}`);
 });
