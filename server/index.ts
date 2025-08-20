@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
+
 import { Pool } from 'pg';
 
 export const pool = new Pool({
@@ -10,11 +11,19 @@ export const pool = new Pool({
     database: process.env.PG_DB,
     password: process.env.PG_PASSWORD,
     port: 5432,
-})
-
+});
 
 const app = express();
 const port = 5000;
+
+async function getFish() {
+    try {
+        const res = await pool.query('SELECT * FROM fish');
+        console.log(res.rows);
+    } catch (err) {
+        console.error('Error fetching fish:', err);
+    }
+}
 
 // Handlebars
 app.set('view engine', 'hbs');
@@ -46,4 +55,5 @@ app.get('*', (req, res) => {
 
 app.listen(port, () => { // Run Server with npm run dev
     console.log(`Server is running at http://localhost:${port}`);
+    getFish();
 });
