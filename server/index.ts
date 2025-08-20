@@ -1,5 +1,16 @@
 import express from 'express';
 import path from 'path';
+import dotenv from 'dotenv';
+dotenv.config();
+import { Pool } from 'pg';
+
+export const pool = new Pool({
+    user: process.env.PG_USER,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DB,
+    password: process.env.PG_PASSWORD,
+    port: 5432,
+})
 
 
 const app = express();
