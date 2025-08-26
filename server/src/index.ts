@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
-import fs from "fs";
+import { load_game_data, game_data } from "./config_loader";
 
 import { Pool } from 'pg';
 
@@ -24,31 +24,6 @@ async function getFish() {
     } catch (err) {
         console.error('Error fetching fish:', err);
     }
-}
-
-export interface Fish {
-    id: number;
-    name: string;
-    description: string;
-    rarity: number;
-    price: number;
-}
-
-export interface Stats {
-    reel_speed: number;
-    luck: number;
-}
-
-export const game_data = {
-    fish: [] as Fish[],
-    stats: [] as Stats[],
-};
-
-export function load_game_data() {
-    game_data.fish = JSON.parse(fs.readFileSync("./game_data/fish.json", "utf-8"));
-    game_data.stats = JSON.parse(fs.readFileSync("./game_data/fish.json", "utf-8"));
-
-    console.log("JSONs loaded");
 }
 
 // Handlebars
@@ -78,9 +53,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 */
+load_game_data();
 
 app.listen(port, () => { // Run Server with npm run dev
     console.log(`Server is running at http://localhost:${port}`);
     getFish();
-    load_game_data();
 });
