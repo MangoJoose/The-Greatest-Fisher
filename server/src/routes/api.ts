@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { game_data } from "../config_loader";
 import { go_fish } from "../controller";
 
 

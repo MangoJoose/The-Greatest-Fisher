@@ -12,6 +12,7 @@ function App() {
         throw new Error("Failed to fetch");
       }
       console.log("Fetch Successful");
+      console.log(response);
     } catch (error) {
       console.error("Error fetching:", error);
     }
