@@ -1,9 +1,30 @@
 [
     {
         "id": 1,
-        "name": "cod",
+        "name": "Cod",
         "description": "A common saltwater fish.",
         "rarity": 1,
         "price": 1
+    },
+    {
+        "id": 2,
+        "name": "Tuna",
+        "description": "A sea chicken.",
+        "rarity": 1,
+        "price": 2
+    }, 
+    {
+        "id": 3,
+        "name": "Sardine",
+        "description": "The staple of Swallow Falls.",
+        "rarity": 1,
+        "price": 1
+    },
+    {
+        "id": 4,
+        "name": "Halibut",
+        "description": "It's pretty big.",
+        "rarity": 2,
+        "price": 5
     }
 ]
