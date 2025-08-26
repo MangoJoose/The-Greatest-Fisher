@@ -20,7 +20,7 @@ export const game_data = {
 
 export function load_game_data() {
     game_data.fish = JSON.parse(fs.readFileSync("./game_data/fish.json", "utf-8"));
-    game_data.stats = JSON.parse(fs.readFileSync("./game_data/fish.json", "utf-8"));
+    game_data.stats = JSON.parse(fs.readFileSync("./game_data/stats.json", "utf-8"));
 
     console.log("JSONs loaded");
 }
