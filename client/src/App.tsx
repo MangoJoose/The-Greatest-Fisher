@@ -5,13 +5,11 @@ import Button from "./components/Button";
 function App() {
 
   const testAlert = async () => {
-    alert("Test Alert");
     try {
       const response = await fetch("/api/fish");
       if (!response.ok) {
         throw new Error("Failed to fetch");
       }
-      console.log("Fetch Successful");
       console.log(response);
     } catch (error) {
       console.error("Error fetching:", error);

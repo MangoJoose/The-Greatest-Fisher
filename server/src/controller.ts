@@ -15,7 +15,18 @@ export async function go_fish(req: Request, res: Response) {
             console.log("Uncommon Fished");
         }
         const fish_rand: number = Math.random();
-        res.json({string: "Response"});
+        const amount_of_fish: number = fish_table.length;
+        let chance: number = 1 / amount_of_fish;
+        let fished_fish = 0;
+        for (let i=0; i<amount_of_fish; i++) {
+            if (fish_rand < chance) {
+                fished_fish = i;
+                break;
+            }
+            chance += chance;
+        }
+        console.log(fish_table[fished_fish]);
+        res.json(fish_table[fished_fish]);
     } catch (err) {
         console.error(err);
         res.status(500).send("Error Fishing");
