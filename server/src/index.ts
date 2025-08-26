@@ -3,6 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
 import { load_game_data, game_data } from "./config_loader";
+import apiRoutes from "./routes/api";
 
 import { Pool } from 'pg';
 
@@ -16,6 +17,10 @@ export const pool = new Pool({
 
 const app = express();
 const port = 5000;
+
+app.use(express.json());
+
+app.use("/api", apiRoutes);
 
 async function getFish() {
     try {
