@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "name": "cod",
+        "description": "A common saltwater fish.",
+        "rarity": 1,
+        "price": 1
+    }
+]
