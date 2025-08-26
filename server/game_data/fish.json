@@ -25,6 +25,13 @@
         "name": "Halibut",
         "description": "It's pretty big.",
         "rarity": 2,
+        "price": 8
+    },
+    {
+        "id": 5,
+        "name": "Sea Bass",
+        "description": "Goes good with lemon, not an instrument.",
+        "rarity": 2,
         "price": 5
     }
 ]
