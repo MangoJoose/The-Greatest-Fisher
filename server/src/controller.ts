@@ -2,10 +2,11 @@ import { Request, Response } from "express";
 import { game_data } from "./config_loader";
 import { Fish } from "./config_loader";
 import config from "../game_data/config.json";
+import { addFishToInventory } from "./db";
 
 export async function go_fish(req: Request, res: Response) {
     try {
-        
+
         console.log("Controller Contacted");
         const rand: number = Math.random();
         let fish_table: Fish[] = [];
@@ -32,6 +33,8 @@ export async function go_fish(req: Request, res: Response) {
 
         console.log(fish_table[fished_fish]);
         res.json(fish_table[fished_fish]);
+
+        addFishToInventory(0, fish_table[fished_fish].id, 0, fish_table[fished_fish].price); // TODO: Assign fish to correct inventory, and set up modifiers later
 
     } catch (err) {
         console.error(err);
