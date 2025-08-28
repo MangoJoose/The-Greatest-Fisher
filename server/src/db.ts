@@ -23,6 +23,7 @@ export async function addFishToInventory(account_id: number, fish_id: number, mo
 
         const res = await pool.query(query, values);
         console.log("New inventory row added:", res.rows[0]);
+
         return res.rows[0];
     } catch (err) {
         console.error("Error adding inventory row:", err);
@@ -41,7 +42,25 @@ export async function sellInventory(account_id: number) {
 
         return sum;
     } catch (err) {
-        console.error("Error selling inventory in DB");
+        console.error("Error selling inventory in DB.");
+        throw err;
+    }
+}
+
+export async function add_money(account_id: number, additional_funds: number) {
+    try {
+        const query = `
+        UPDATE accounts
+        SET money = money + $1
+        WHERE id = $2
+        RETURNING *;
+        `;
+        const values = [additional_funds, account_id];
+
+        const res = await pool.query(query, values);
+        return res.rows[0];
+    } catch (err) {
+        console.error("Error adding money to account.");
         throw err;
     }
 }
