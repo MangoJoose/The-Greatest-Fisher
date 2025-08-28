@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { game_data } from "./config_loader";
 import { Fish } from "./config_loader";
 import config from "../game_data/config.json";
-import { addFishToInventory, sellInventory, addMoney } from "./db";
+import { addFishToInventory, sellInventory, addMoney, getMoney } from "./db";
 
 export async function go_fish(req: Request, res: Response) {
     try {
@@ -44,12 +44,28 @@ export async function go_fish(req: Request, res: Response) {
 
 export async function sell_fish(req: Request, res: Response) {
     try {
-        const gold_gained = await sellInventory(1);
+        const gold_gained = await sellInventory(1); // Hardcoded account id 1
+        const new_money = await getMoney(1); // Hardcoded account id 1
         addMoney(1, gold_gained);
-        console.log("Sold inventory success")
-        res.json(gold_gained);
+        console.log("New Money: ", new_money);
+        console.log("Sold inventory success");
+        res.json({goldGained: gold_gained, newTotal: new_money});
     } catch (err) {
         console.error(err);
         res.status(500).send("Error selling");
     }
 }
+/*
+export async function updateMoney(req: Request, res: Response) {
+    try {
+        res.setHeader("Content-Type", "text/event-stream");
+        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("Connection", "keep-alive");
+
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error updating money");
+    }
+}
+    */

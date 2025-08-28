@@ -72,7 +72,7 @@ export async function addMoney(account_id: number, additional_funds: number) {
 export async function getMoney(account_id: number) {
     try {
         const query = `
-        SELECT money WHERE account_id = $1 RETURNING *;
+        SELECT money FROM accounts WHERE id = $1;
         `;
         const value = [account_id];
 
