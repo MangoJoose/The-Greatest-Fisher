@@ -45,8 +45,9 @@ export async function go_fish(req: Request, res: Response) {
 export async function sell_fish(req: Request, res: Response) {
     try {
         const gold_gained = await sellInventory(1);
-        addMoney(gold_gained, 1);
+        addMoney(1, gold_gained);
         console.log("Sold inventory success")
+        res.json(gold_gained);
     } catch (err) {
         console.error(err);
         res.status(500).send("Error selling");
