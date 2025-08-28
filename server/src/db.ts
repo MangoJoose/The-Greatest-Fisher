@@ -31,7 +31,7 @@ export async function addFishToInventory(account_id: number, fish_id: number, mo
     }
 }
 
-export async function sellInventory(account_id: number) {
+export async function sellInventory(account_id: number): Promise<number> {
     try {
         const query =`SELECT final_price FROM fishventory WHERE account_id = $1`;
         const value = [account_id];
@@ -47,7 +47,7 @@ export async function sellInventory(account_id: number) {
     }
 }
 
-export async function add_money(account_id: number, additional_funds: number) {
+export async function addMoney(account_id: number, additional_funds: number) {
     try {
         const query = `
         UPDATE accounts

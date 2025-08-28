@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { game_data } from "./config_loader";
 import { Fish } from "./config_loader";
 import config from "../game_data/config.json";
-import { addFishToInventory } from "./db";
+import { addFishToInventory, sellInventory, addMoney } from "./db";
 
 export async function go_fish(req: Request, res: Response) {
     try {
@@ -34,10 +34,21 @@ export async function go_fish(req: Request, res: Response) {
         console.log(fish_table[fished_fish]);
         res.json(fish_table[fished_fish]);
 
-        addFishToInventory(0, fish_table[fished_fish].id, 0, fish_table[fished_fish].price); // TODO: Assign fish to correct inventory, and set up modifiers later
+        addFishToInventory(1, fish_table[fished_fish].id, 0, fish_table[fished_fish].price); // TODO: Assign fish to correct inventory, and set up modifiers later
 
     } catch (err) {
         console.error(err);
         res.status(500).send("Error Fishing");
+    }
+}
+
+export async function sell_fish(req: Request, res: Response) {
+    try {
+        const gold_gained = await sellInventory(1);
+        addMoney(gold_gained, 1);
+        console.log("Sold inventory success")
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error selling");
     }
 }
