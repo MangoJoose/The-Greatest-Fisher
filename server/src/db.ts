@@ -40,6 +40,10 @@ export async function sellInventory(account_id: number): Promise<number> {
         const sum = res.rows.reduce((acc, row) => acc + Number(row["final_price"]), 0);
         console.log("Inventory sold, gaining:", sum, "gold.");
 
+        const query2 = `DELETE FROM fishventory WHERE account_id = $1 RETURNING *;`;
+        const value2 = [account_id];
+        const res2 = await pool.query(query2, value2);
+
         return sum;
     } catch (err) {
         console.error("Error selling inventory in DB.");
