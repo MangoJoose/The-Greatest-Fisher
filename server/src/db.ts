@@ -68,3 +68,18 @@ export async function addMoney(account_id: number, additional_funds: number) {
         throw err;
     }
 }
+
+export async function getMoney(account_id: number) {
+    try {
+        const query = `
+        SELECT money WHERE account_id = $1 RETURNING *;
+        `;
+        const value = [account_id];
+
+        const res = await pool.query(query, value);
+        return res.rows[0].money;
+    } catch (err) {
+        console.error("Error getting money from database: ", err);
+        throw err;
+    }
+}
