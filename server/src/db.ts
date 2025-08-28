@@ -29,3 +29,19 @@ export async function addFishToInventory(account_id: number, fish_id: number, mo
         throw err;
     }
 }
+
+export async function sellInventory(account_id: number) {
+    try {
+        const query =`SELECT final_price FROM fishventory WHERE account_id = $1`;
+        const value = [account_id];
+        
+        const res = await pool.query(query, value);
+        const sum = res.rows.reduce((acc, row) => acc + Number(row["final_price"]), 0);
+        console.log("Inventory sold, gaining:", sum, "gold.");
+
+        return sum;
+    } catch (err) {
+        console.error("Error selling inventory in DB");
+        throw err;
+    }
+}
