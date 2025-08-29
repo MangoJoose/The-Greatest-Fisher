@@ -63,9 +63,7 @@ function App() {
         <MoneyDisplay label={money_display}/>
         <Button label="Fish" onClick={goFish} is_running={is_running}/>
         <Button label="Sell All" onClick={sellFish} is_running={false}/>
-        { show && (
-          <FishDisplay name={fish_display.name} description={fish_display.description} rarity={fish_display.rarity} price={fish_display.price}/>
-        )}
+        <FishDisplay name={fish_display.name} description={fish_display.description} rarity={fish_display.rarity} price={fish_display.price} visible={show}/>
       </div>
     );
   }

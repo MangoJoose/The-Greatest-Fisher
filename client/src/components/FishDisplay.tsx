@@ -6,9 +6,10 @@ type FishProps = {
     description: string;
     rarity: number;
     price: number;
+    visible: boolean;
 }
 
-function FishDisplay({ name, description, rarity, price }: FishProps) {
+function FishDisplay({ name, description, rarity, price, visible }: FishProps) {
 
     let rar = "";
 
@@ -23,7 +24,10 @@ function FishDisplay({ name, description, rarity, price }: FishProps) {
     }
 
     return (
-        <div className="fish-display">
+        <div
+            className="fish-display"
+            style={{ visibility: visible ? "visible" : "hidden" }}
+        >
             <h2>You caught a {name}!</h2>
             <h3>{rar}</h3>
             <p>Sell Price: {price}g</p>
