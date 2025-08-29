@@ -56,7 +56,7 @@ function App() {
       <header className="App-header">
         <MoneyDisplay label={money_display}/>
         <Button label="Fish" onClick={goFish} is_running={is_running}/>
-        <Button label="Sell All" onClick={sellFish} is_running={true}/>
+        <Button label="Sell All" onClick={sellFish} is_running={false}/>
         <FishDisplay name={fish_display.name} description={fish_display.description} rarity={fish_display.rarity} price={fish_display.price}/>
       </header>
     </div>
