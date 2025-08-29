@@ -7,6 +7,7 @@ import FishDisplay from "./components/FishDisplay";
 function App() {
 
   const [money_display, setMoneyDisplay] = useState("");
+  const [is_running, setIsRunning] = useState(false);
   const [fish_display, setFishDisplay] = useState({
     name: "",
     description: "",
@@ -16,6 +17,8 @@ function App() {
 
   const goFish = async () => {
     try {
+      if (is_running) return;
+      setIsRunning(true);
       const response = await fetch("/api/fish");
       const data = await response.json();
       if (!response.ok) {
@@ -28,6 +31,7 @@ function App() {
         rarity: data.rarity,
         price: data.price,
       });
+      setIsRunning(false);
     } catch (err) {
       console.error("Error Fishing:", err);
     }
@@ -51,8 +55,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <MoneyDisplay label={money_display}/>
-        <Button label="Fish" onClick={goFish}/>
-        <Button label="Sell All" onClick={sellFish}/>
+        <Button label="Fish" onClick={goFish} is_running={is_running}/>
+        <Button label="Sell All" onClick={sellFish} is_running={true}/>
         <FishDisplay name={fish_display.name} description={fish_display.description} rarity={fish_display.rarity} price={fish_display.price}/>
       </header>
     </div>

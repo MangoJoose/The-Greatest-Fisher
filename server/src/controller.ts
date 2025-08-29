@@ -4,8 +4,16 @@ import { Fish } from "./config_loader";
 import config from "../game_data/config.json";
 import { addFishToInventory, sellInventory, addMoney, getMoney } from "./db";
 
+function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export async function go_fish(req: Request, res: Response) {
     try {
+
+        console.log("Before delay");
+        await delay(2000);
+        console.log("After delay");
 
         console.log("Controller Contacted");
         const rand: number = Math.random();

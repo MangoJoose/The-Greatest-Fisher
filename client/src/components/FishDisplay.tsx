@@ -22,7 +22,7 @@ function FishDisplay({ name, description, rarity, price }: FishProps) {
     }
 
     return (
-        <div style ={{ lineHeight: "0.6" }}>
+        <div style = {{ lineHeight: "0.6" }}>
             <h2>You caught a {name}!</h2>
             <h3>{rar}</h3>
             <p>{description}</p>
