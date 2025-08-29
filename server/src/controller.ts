@@ -45,8 +45,8 @@ export async function go_fish(req: Request, res: Response) {
 export async function sell_fish(req: Request, res: Response) {
     try {
         const gold_gained = await sellInventory(1); // Hardcoded account id 1
+        await addMoney(1, gold_gained);
         const new_money = await getMoney(1); // Hardcoded account id 1
-        addMoney(1, gold_gained);
         console.log("New Money: ", new_money);
         console.log("Sold inventory success");
         res.json({goldGained: gold_gained, newTotal: new_money});
