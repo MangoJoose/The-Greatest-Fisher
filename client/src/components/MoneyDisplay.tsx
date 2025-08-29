@@ -7,7 +7,7 @@ type DisplayProps = {
 
 function MoneyDisplay({ label }: DisplayProps) {
     return (
-        <h1>{label}</h1>
+        <h1>Gold: {label}g</h1>
     )
 };
 
