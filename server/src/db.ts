@@ -1,5 +1,6 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
+import { FishInstance } from "./config_loader";
 
 dotenv.config();
 
@@ -71,15 +72,32 @@ export async function addMoney(account_id: number, additional_funds: number) {
 
 export async function getMoney(account_id: number) {
     try {
-        const query = `
-        SELECT money FROM accounts WHERE id = $1;
-        `;
+        const query = `SELECT money FROM accounts WHERE id = $1;`;
         const value = [account_id];
 
         const res = await pool.query(query, value);
         return res.rows[0].money;
     } catch (err) {
         console.error("Error getting money from database: ", err);
+        throw err;
+    }
+}
+
+export async function getFishventory(account_id: number) {
+    try {
+        const query = `
+        SELECT fish_id, modifier FROM fishventory WHERE account_id = $1
+        `;
+        const value = [account_id];
+
+        const res = await pool.query(query, value);
+        const fish_list: FishInstance[] = res.rows.map(row => ({
+            id: row.fish_id,
+            modifier: row.modifier
+        }));
+        return fish_list;
+    } catch (err) {
+        console.error("Error getting fishventory from database: ", err);
         throw err;
     }
 }

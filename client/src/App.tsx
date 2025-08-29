@@ -35,6 +35,7 @@ function App() {
       });
       setShow((s) => !s);
       setIsRunning(false);
+      getFish();
     } catch (err) {
       console.error("Error Fishing:", err);
     }
@@ -54,8 +55,26 @@ function App() {
     }
   };
 
+  const getFish = async () => {
+    try {
+      const response = await fetch("api/getfish");
+      if (!response.ok) {
+        throw new Error("Failed to fetch fish");
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error("Error getting fish: ", err);
+    }
+  }
+
   function Left() {
-    return <div className="section">Left</div>;
+    return (
+      <div className="fishventory">
+        <h1>Fishventory</h1>
+
+      </div>
+    );
   }
   function Middle() {
     return (
