@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
 import './App.css';
 import Button from "./components/Button";
-import MoneyDisplay from './components/MoneyDisplay';
+import MoneyDisplay from "./components/MoneyDisplay";
+import FishDisplay from "./components/FishDisplay";
 
 function App() {
 
-  const [money_display, setMoneyDisplay] = useState("Gold: ");
+  const [money_display, setMoneyDisplay] = useState("");
+  const [fish_display, setFishDisplay] = useState({
+    name: "",
+    description: "",
+    rarity: 0,
+    price: 0,
+  });
 
-  const testAlert = async () => {
+  const goFish = async () => {
     try {
       const response = await fetch("/api/fish");
       const data = await response.json();
       if (!response.ok) {
-        throw new Error("Failed to fetch");
+        throw new Error("Failed to go fish");
       }
       console.log(data);
+      setFishDisplay({
+        name: data.name,
+        description: data.description,
+        rarity: data.rarity,
+        price: data.price,
+      });
     } catch (err) {
-      console.error("Error fetching:", err);
+      console.error("Error Fishing:", err);
     }
   };
 
@@ -28,17 +41,9 @@ function App() {
       }
       const data = await response.json();
       console.log("New Money: ", data.newTotal);
-      setMoneyDisplay(`Gold: ${data.newTotal}`);
+      setMoneyDisplay(data.newTotal);
     } catch (err) {
       console.error("Error sell fetching:", err);
-    }
-  };
-
-  const updateMoney = async () => {
-    try {
-
-    } catch (err) {
-      console.error("Error updating money:", err);
     }
   };
 
@@ -46,8 +51,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <MoneyDisplay label={money_display}/>
-        <Button label="Fish" onClick={testAlert} />
-        <Button label="Sell All" onClick={sellFish} />
+        <Button label="Fish" onClick={goFish}/>
+        <Button label="Sell All" onClick={sellFish}/>
+        <FishDisplay name={fish_display.name} description={fish_display.description} rarity={fish_display.rarity} price={fish_display.price}/>
       </header>
     </div>
   );
