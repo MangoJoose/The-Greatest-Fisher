@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
-import { FishInstance } from "./config_loader";
+import { FishInstance } from "../../shared/types/fish";
 
 dotenv.config();
 

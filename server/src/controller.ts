@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { game_data } from "./config_loader";
-import { Fish, FishInstance, getFishById } from "./config_loader";
+import { Fish, FishInstance } from "../../shared/types/fish";
+import { getFishById } from "./config_loader";
 import config from "../game_data/config.json";
 import { addFishToInventory, sellInventory, addMoney, getMoney, getFishventory } from "./db";
 
