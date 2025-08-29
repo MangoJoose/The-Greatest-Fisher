@@ -1,4 +1,5 @@
 import React from "react";
+import "../App.css";
 
 type FishProps = {
     name: string;
@@ -22,10 +23,9 @@ function FishDisplay({ name, description, rarity, price }: FishProps) {
     }
 
     return (
-        <div style = {{ lineHeight: "0.6" }}>
+        <div className="fish-display">
             <h2>You caught a {name}!</h2>
             <h3>{rar}</h3>
-            <p>{description}</p>
             <p>Sell Price: {price}g</p>
         </div>
         

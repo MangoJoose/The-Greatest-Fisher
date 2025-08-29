@@ -28,6 +28,39 @@
   color: #61dafb;
 }
 
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.section {
+  flex: 1;
+  background-color: #282c34;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  flex-direction: column;
+}
+
+.fish-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  flex-direction: column;
+  margin: 0;
+}
+
+.fish-display h2,
+.fish-display h3,
+.fish-display p {
+  margin: 0;
+  line-height:1.3;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

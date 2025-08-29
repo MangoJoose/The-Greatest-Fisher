@@ -51,14 +51,28 @@ function App() {
     }
   };
 
-  return (
-    <div className="App">
-      <header className="App-header">
+  function Left() {
+    return <div className="section">Left</div>;
+  }
+  function Middle() {
+    return (
+      <div className="section">
         <MoneyDisplay label={money_display}/>
         <Button label="Fish" onClick={goFish} is_running={is_running}/>
         <Button label="Sell All" onClick={sellFish} is_running={false}/>
         <FishDisplay name={fish_display.name} description={fish_display.description} rarity={fish_display.rarity} price={fish_display.price}/>
-      </header>
+      </div>
+    );
+  }
+  function Right() {
+    return <div className="section">Right</div>;
+  }
+
+  return (
+    <div className="container">
+      <Left />
+      <Middle />
+      <Right />
     </div>
   );
 }
