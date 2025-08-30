@@ -3,12 +3,15 @@ import './App.css';
 import Button from "./components/Button";
 import MoneyDisplay from "./components/MoneyDisplay";
 import FishDisplay from "./components/FishDisplay";
+import FishventoryDisplay from "./components/FishventoryDisplay";
+import { Fish } from "../../shared/types/fish";
 
 function App() {
 
   const [show, setShow] = useState(true);
   const [money_display, setMoneyDisplay] = useState("");
   const [is_running, setIsRunning] = useState(false);
+  const [fishventory_display, setFishventoryDisplay] = useState<Fish[]>([]);
   const [fish_display, setFishDisplay] = useState({
     name: "",
     description: "",
@@ -50,6 +53,7 @@ function App() {
       const data = await response.json();
       console.log("New Money: ", data.newTotal);
       setMoneyDisplay(data.newTotal);
+      setFishventoryDisplay([]);
     } catch (err) {
       console.error("Error sell fetching:", err);
     }
@@ -62,6 +66,7 @@ function App() {
         throw new Error("Failed to fetch fish");
       }
       const data = await response.json();
+      setFishventoryDisplay(data);
       console.log(data);
     } catch (err) {
       console.error("Error getting fish: ", err);
@@ -72,7 +77,7 @@ function App() {
     return (
       <div className="fishventory">
         <h1>Fishventory</h1>
-
+        <FishventoryDisplay fish_list={fishventory_display} />
       </div>
     );
   }

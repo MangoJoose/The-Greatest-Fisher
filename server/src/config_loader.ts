@@ -1,22 +1,5 @@
 import fs from "fs";
-
-export interface Fish {
-    id: number;
-    name: string;
-    description: string;
-    rarity: number;
-    price: number;
-}
-
-export interface Stats {
-    reel_speed: number;
-    luck: number;
-}
-
-export interface FishInstance {
-    id: number;
-    modifier: number;
-}
+import { Fish, Stats } from "../../shared/types/fish";
 
 export const game_data = {
     fish: [] as Fish[],
